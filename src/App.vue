@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Header />
     <nav>
       <router-link to="/">Home</router-link>
       <router-link to="/about">About</router-link>
@@ -11,10 +12,12 @@
 
 <script>
 import Blog from './pages/Blog.vue'
+import Header from "./components/Header";
 
 export default {
   name: 'app',
   components: {
+      Header,
     Blog
   }
 }

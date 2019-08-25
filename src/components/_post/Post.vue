@@ -1,7 +1,10 @@
 <template>
-    <h2>{{post.title}}</h2>
+    <div>
 
-    <p>{{post.text}}</p>
+        <h2>{{post.tittle}}</h2>
+
+        <p>{{post.text}}</p>
+    </div>
 </template>
 
 <script>
@@ -16,6 +19,6 @@
     }
 </script>
 
-<style scoped>
+<style>
 
 </style>

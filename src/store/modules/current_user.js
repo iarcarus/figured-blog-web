@@ -1,7 +1,7 @@
 import BrowserStorage from '../../services/browser-storage'
 
 const state = {
-    checkIfUserAreLoggedIn: typeof BrowserStorage.get('token') !== 'undefined',
+    checkIfUserAreLoggedIn: typeof BrowserStorage.get('access_token') !== 'undefined',
     user: {
         role: {
             permissions: {}
@@ -18,7 +18,7 @@ const mutations = {
     authenticated: state => state.checkIfUserAreLoggedIn = true,
     unauthenticated: state => state.checkIfUserAreLoggedIn = false,
     setUser: (state, user) => {
-        state.user = user || {}
+        state.user.name = user.name || {}
         state.permissions = state.user.role.permissions || {}
     }
 }

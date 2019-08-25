@@ -3,15 +3,14 @@ import BrowserStorage from '../../services/browser-storage'
 import Router from '../../router'
 
 let instance = axios.create({
-    baseURL: 'http://localhost:8000',
+    baseURL: 'http://localhost:8000/',
     responseType: 'json'
 })
 
 instance.interceptors.request.use((config) => {
     let authToken = BrowserStorage.get('access_token')
-
     if (typeof authToken !== 'undefined') {
-        config.headers.authorization = authToken
+        config.headers.authorization = `Bearer ${authToken}`
     }
 
     return config
@@ -28,9 +27,7 @@ instance.interceptors.response.use((response) => {
     return response
 
 }, function (error) {
-    const responseStatus = error && error.response && error.response.status
-
-    if (expectedErrorResponses.includes(responseStatus)) {
+    if (error.response.status === 401) {
         Router.push({ name: 'Login' })
     }
 
