@@ -1,6 +1,7 @@
 import store from '../store/store'
 import api from '../router/axios/api'
 import BrowserStorage from './browser-storage'
+import {hasPermission} from "./permissions";
 
 const authentication = {
     isUserLogged: store.state.currentUser.checkIfUserAreLoggedIn,
@@ -22,7 +23,7 @@ const authentication = {
     },
     canAccess: function(module = null, permission = null) {
     return new Promise((resolve, reject) => {
-        // let listPermissions = store.state.currentUser.user.role.permissions['WEB']
+        // let listPermissions = store.state.currentUser.user.role.permissions
         //
         // this.isUserLogged = store.state.currentUser.checkIfUserAreLoggedIn
         //
@@ -30,7 +31,6 @@ const authentication = {
         //     if (permission == null) {
         //         return hasPermission(module) && this.isUserLogged ? resolve() : reject()
         //     }
-        //     return hasAction(module, permission) && this.isUserLogged ? resolve() : reject()
         // }
         //
         // if (listPermissions) {
@@ -38,6 +38,7 @@ const authentication = {
         // } else {
             api.post('/auth/me').then((response) => {
                 store.dispatch('currentUser/saveCurrentUser', response.data.user)
+                resolve()
             }).catch(() => {
                 store.dispatch('currentUser/resetCurrentUser')
                 BrowserStorage.remove('access_token')

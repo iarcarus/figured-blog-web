@@ -1,6 +1,7 @@
 <template>
     <div class="about">
-        <router-link to="/post/create"><i class="material-icons">add</i></router-link>
+        <router-link v-if="isAdmin" to="/post/create"><i class="material-icons">add</i>
+        </router-link>
         <div v-if="posts.length">
 
             <Post
@@ -39,6 +40,10 @@
                     .then(response => {
                         this.posts = response.data.data
                     })
+            }
+        }, computed:{
+            isAdmin(){
+                return this.$hasPermission('web.blog.index')
             }
         }
     }

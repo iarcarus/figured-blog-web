@@ -8,7 +8,7 @@ import authentication from './services/authentication'
 
 Vue.use(Router)
 
-const router =  new Router({
+const router = new Router({
     routes: [
         {
             path: '/',
@@ -40,8 +40,10 @@ const router =  new Router({
 })
 
 router.beforeEach((to, from, next) => {
-             authentication.canAccess()
-    next()
+    authentication.canAccess()
+        .then(() => next())
+        .catch()
+
 })
 
 export default router

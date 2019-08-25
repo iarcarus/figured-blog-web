@@ -6,7 +6,7 @@
             <label>Texto</label>
             <input v-model="newPost.text" placeholder="My new post" type="text"/>
         </form>
-        <div style="color: darkgrey">
+        <div v-if="newPost._id" style="color: darkgrey">
             <label>Autor</label>
             <p v-if="newPost.author">
                 {{newPost.author.name}}
