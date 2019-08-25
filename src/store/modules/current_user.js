@@ -19,7 +19,7 @@ const mutations = {
     unauthenticated: state => state.checkIfUserAreLoggedIn = false,
     setUser: (state, user) => {
         state.user.name = user.name || {}
-        state.permissions = state.user.role.permissions || {}
+        state.permissions = user.role.permissions || {}
     }
 }
 

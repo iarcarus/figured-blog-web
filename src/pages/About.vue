@@ -1,15 +1,18 @@
 <template>
-  <div class="about">
+    <div class="about">
+        <router-link to="/post/create"><i class="material-icons">add</i></router-link>
+        <div v-if="posts.length">
 
-    <div>
-
-      <Post
-              v-for="(post, index) in posts"
-              v-bind:key="index"
-             v-bind:post="post"
-      />
+            <Post
+                    v-for="(post, index) in posts"
+                    v-bind:key="index"
+                    v-bind:post="post"
+            />
+        </div>
+        <div v-else>
+            <p>Nao existem posts</p>
+        </div>
     </div>
-  </div>
 
 </template>
 
@@ -34,9 +37,7 @@
                 api.get('post/')
                     .then(response => {
                         this.posts = response.data.data
-                    }).catch(e => {
-                    console.log(e)
-                })
+                    })
             }
         }
     }
