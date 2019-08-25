@@ -49,12 +49,11 @@
             }
         },
         created() {
-            const id = this.$route.params.id || 1
+            const id = this.$route.params.id
 
             if (id) {
                 api.get(`post/${id}`)
                     .then(({data}) => {
-                        console.log(data.data)
                         this.newPost = data.data
                     }).catch(e => {
                     if (e.status == 422) {
