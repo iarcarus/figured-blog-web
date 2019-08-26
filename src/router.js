@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import CreatePost from './components/_post/CreatePost'
+import SinglePost from './components/_post/SinglePost'
 import Home from './pages/Home.vue'
 import Login from './pages/Login.vue'
 import Signup from './pages/Signup.vue'
-import Post from './components/_post/Post.vue'
 import authentication from './services/authentication'
 import {BLOG_EDIT, BLOG_CREATE, BLOG_INDEX} from './collections/permissions.collection'
 
@@ -33,6 +33,11 @@ const router = new Router({
             name: 'EditPost',
             meta: {permission: BLOG_EDIT},
             component: CreatePost
+        },
+        {
+            path: '/post/:id',
+            name: 'ShowPost',
+            component: SinglePost
         },
         {
             path: '/user/signup',

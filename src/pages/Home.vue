@@ -5,13 +5,12 @@
 
                 <Post
                         v-for="(post, index) in posts"
-                        v-on:reloadPosts="loadPosts"
                         v-bind:key="index"
                         v-bind:post="post"
                 />
             </div>
             <div v-else>
-                <p>Nao existem posts</p>
+                <p>There are no posts</p>
             </div>
         </div>
             <Aside/>
@@ -50,6 +49,4 @@
             }
         }
     }
-
-
 </script>

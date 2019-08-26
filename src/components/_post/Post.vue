@@ -5,26 +5,13 @@
             <p class="blog-post-meta">{{post.created_at}} by {{post.author.name}}</p>
         </div>
 
-        <p v-if="single">{{post.text}}</p>
-        <div v-else>
-            <p>{{resume}}</p>
-            <a href="Post.vue">Saiba mais</a>
-        </div>
-
-        <div>
-            <button type="button" v-if="canDestroy" @click="deletePost(post._id)" class="btn btn-outline-danger">
-                Delete
-            </button>
-            <button type="button" v-if="canEdit" @click="edit(post._id)" class="btn btn-outline-primary">Edit</button>
-        </div>
-        <hr v-if="!single"/>
+        <p>{{resume}}...</p>
+        <router-link :to="{ name: 'ShowPost', params: { id: post._id }}">Read more...</router-link>
+        <hr />
     </div>
 </template>
 
 <script>
-    import api from '../../router/axios/api'
-    import {BLOG_EDIT, BLOG_DESTROY} from '../../collections/permissions.collection'
-
     export default {
         name: "Post",
         props: {
@@ -32,28 +19,9 @@
                 type: Object,
                 required: true
             },
-            single: {
-                type: Boolean,
-                default: false
-            }
         },
         methods: {
-            edit(id) {
-                this.$router.push({name: 'EditPost', params: {id: id}})
-            },
-            deletePost(id) {
-                api.delete(`post/${id}`).then(() => {
-                    this.$toast.open('deleted')
-                    this.$emit('reloadPosts')
-                }).catch()
-            }
         }, computed: {
-            canEdit() {
-                return this.$hasPermission(BLOG_EDIT)
-            },
-            canDestroy() {
-                return this.$hasPermission(BLOG_DESTROY)
-            },
             resume() {
                 return this.post.text.substring(0, 100)
             }
