@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <header class="blog-header py-3">
             <div class="row flex-nowrap justify-content-between align-items-center">
                 <div class="col-8 text-center">
@@ -10,8 +10,10 @@
                         <p class="" v-if="userName"> {{userName}}</p>
                         <a v-if="userName" class="btn btn-sm btn-outline-secondary" @click="logout">Logout</a>
                     </div>
-                    <a v-else class="btn btn-sm btn-outline-secondary" @click="signup" >Sign up</a>
-                    <a v-if="!userName" class="btn btn-sm btn-outline-secondary"><router-link to="/login">Sign in</router-link></a>
+                    <a v-else class="btn btn-sm btn-outline-secondary" @click="signup">Sign up</a>
+                    <a v-if="!userName" class="btn btn-sm btn-outline-secondary">
+                        <router-link to="/login">Sign in</router-link>
+                    </a>
                 </div>
             </div>
         </header>
@@ -20,19 +22,20 @@
 
 <script>
     import authentication from './../services/authentication'
+
     export default {
         name: "Header",
         data() {
             return {name: ''}
         },
-        methods:{
-          logout(){
-              authentication.logout().then(()=>{
+        methods: {
+            logout() {
+                authentication.logout().then(() => {
 
-              })
-          },
+                })
+            },
             signup() {
-              this.$router.push({name: 'Signup'})
+                this.$router.push({name: 'Signup'})
             }
         },
         computed: {

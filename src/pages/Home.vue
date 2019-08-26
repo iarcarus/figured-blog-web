@@ -2,7 +2,6 @@
     <div class="row">
         <div class="row col-md-8 blog-main" style="margin-top: 50px">
             <div v-if="posts.length" class="col s7">
-
                 <Post
                         v-for="(post, index) in posts"
                         v-bind:key="index"
@@ -13,7 +12,7 @@
                 <p>There are no posts</p>
             </div>
         </div>
-            <Aside/>
+        <Aside/>
     </div>
 
 </template>
@@ -43,8 +42,8 @@
                         this.posts = response.data.data
                     })
             }
-        }, computed:{
-            canCreate(){
+        }, computed: {
+            canCreate() {
                 return this.$hasPermission(BLOG_CREATE)
             }
         }

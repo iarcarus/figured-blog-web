@@ -1,5 +1,5 @@
 <template>
-    <div >
+    <div>
         <form>
             <div class="form-group">
                 <label>Title</label>
@@ -15,18 +15,18 @@
                 <button type="button" @click="save" class="btn btn-outline-primary">Save</button>
             </div>
         </form>
-        <form  v-if="newPost._id"  >
-        <div class="form-group">
-            <label>Author</label>
-            <input v-model="newPost.author.name" class="form-control" type="text" readonly>
-        </div>
+        <form v-if="newPost._id">
+            <div class="form-group">
+                <label>Author</label>
+                <input v-model="newPost.author.name" class="form-control" type="text" readonly>
+            </div>
             <div class="form-group">
                 <label>Id</label>
                 <input v-model="newPost._id" type="text" class="form-control" readonly/>
             </div>
             <div class="form-group">
                 <label>Created</label>
-                <input v-model="newPost.created_at" type="text"  class="form-control" readonly/>
+                <input v-model="newPost.created_at" type="text" class="form-control" readonly/>
             </div>
             <div class="form-group">
                 <label>Last updated</label>
@@ -75,7 +75,7 @@
                     case 'new':
                         api.post('post', {post_form: this.newPost})
                             .then(response => {
-                                this.$router.push('/')
+                                this.$router.push({name: 'Home'})
                                 this.$toast.open({
                                     message: 'Created',
                                 })
@@ -92,7 +92,7 @@
                     case 'edit':
                         api.put(`post/${this.newPost._id}`, {post_form: this.newPost})
                             .then(response => {
-                                this.$router.push('/')
+                                this.$router.push({name: 'Home'})
                                 this.$toast.open({
                                     message: 'Saved',
                                 })
@@ -109,7 +109,7 @@
                 }
             },
             back() {
-                this.$router.push('/')
+                this.$router.push({name: 'Home'})
             }
         }
     }

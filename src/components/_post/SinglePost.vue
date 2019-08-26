@@ -48,8 +48,6 @@
         created() {
             const id = this.$route.params.id
 
-            console.log(id)
-
             api.get(`post/${id}`)
                 .then(({data}) => {
                     this.aPost = data.data

@@ -8,7 +8,7 @@ const state = {
             permissions: {}
         }
     },
-    permissions : []
+    permissions: []
 }
 
 const getters = {

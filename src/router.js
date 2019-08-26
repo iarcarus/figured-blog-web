@@ -6,7 +6,7 @@ import Home from './pages/Home.vue'
 import Login from './pages/Login.vue'
 import Signup from './pages/Signup.vue'
 import authentication from './services/authentication'
-import {BLOG_EDIT, BLOG_CREATE, BLOG_INDEX} from './collections/permissions.collection'
+import {BLOG_EDIT, BLOG_CREATE} from './collections/permissions.collection'
 
 Vue.use(Router)
 

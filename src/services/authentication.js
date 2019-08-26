@@ -21,38 +21,38 @@ const authentication = {
             BrowserStorage.remove('access_token')
         })
     },
-    canAccess: function(permission = null) {
-    return new Promise((resolve, reject) => {
-        const listPermissions = store.state.currentUser.permissions
+    canAccess: function (permission = null) {
+        return new Promise((resolve, reject) => {
+            const listPermissions = store.state.currentUser.permissions
 
-        this.isUserLogged = store.state.currentUser.checkIfUserAreLoggedIn
+            this.isUserLogged = store.state.currentUser.checkIfUserAreLoggedIn
 
-        const verifyPermission = () => {
-            if (permission === null){
-                return resolve()
+            const verifyPermission = () => {
+                if (permission === null) {
+                    return resolve()
+                }
+                if (permission) {
+                    const mustValidate = hasPermission(permission) && this.isUserLogged
+                    return mustValidate ? resolve() : reject()
+                }
             }
-            if (permission) {
-                const mustValidate = hasPermission(permission) && this.isUserLogged
-                return mustValidate ? resolve() : reject()
-            }
-        }
 
-        if (listPermissions.length) {
-            verifyPermission()
-        } else {
-            api.post('/auth/me').then((response) => {
-                store.dispatch('currentUser/saveCurrentUser', response.data.user)
-                    .then(() => {
-                    verifyPermission()
+            if (listPermissions.length) {
+                verifyPermission()
+            } else {
+                api.post('/auth/me').then((response) => {
+                    store.dispatch('currentUser/saveCurrentUser', response.data.user)
+                        .then(() => {
+                            verifyPermission()
+                        })
+                }).catch(() => {
+                    store.dispatch('currentUser/resetCurrentUser')
+                    BrowserStorage.remove('access_token')
+                    reject()
                 })
-            }).catch(() => {
-                store.dispatch('currentUser/resetCurrentUser')
-                BrowserStorage.remove('access_token')
-                reject()
-            })
-        }
-    })
-}
+            }
+        })
+    }
 }
 
 export default authentication 

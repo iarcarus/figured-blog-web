@@ -1,27 +1,23 @@
 <template>
-  <div id="app" class="container">
-    <Header />
-    <router-view />
-  </div>
+    <div id="app" class="container">
+        <Header/>
+        <router-view/>
+    </div>
 </template>
 
 <script>
-import Header from "./components/Header";
-import Aside from "./components/Aside";
+    import Header from "./components/Header";
+    import Aside from "./components/Aside";
 
-export default {
-  name: 'app',
-  components: {
-      Aside,
-      Header
-  }
-}
+    export default {
+        name: 'app',
+        components: {
+            Aside,
+            Header
+        }
+    }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-
-}
-
+    #app {}
 </style>

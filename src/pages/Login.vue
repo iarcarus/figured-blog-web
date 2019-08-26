@@ -32,7 +32,7 @@
             login() {
                 authentication.login(this.credentials)
                     .then(() => {
-                        this.$router.push('/')
+                        this.$router.push({name: 'Home'})
                     })
                     .catch(reason => {
                     })

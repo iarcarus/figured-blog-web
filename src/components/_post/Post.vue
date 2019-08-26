@@ -7,7 +7,7 @@
 
         <p>{{resume}}...</p>
         <router-link :to="{ name: 'ShowPost', params: { id: post._id }}">Read more...</router-link>
-        <hr />
+        <hr/>
     </div>
 </template>
 
@@ -20,8 +20,7 @@
                 required: true
             },
         },
-        methods: {
-        }, computed: {
+        methods: {}, computed: {
             resume() {
                 return this.post.text.substring(0, 100)
             }
