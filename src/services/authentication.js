@@ -16,7 +16,7 @@ const authentication = {
             })
     },
     logout: () => {
-        return api.get('/signout').then(() => {
+        return api.post('/auth/logout').then(() => {
             store.dispatch('currentUser/resetCurrentUser')
             BrowserStorage.remove('access_token')
         })

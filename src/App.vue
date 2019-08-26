@@ -1,18 +1,18 @@
 <template>
-  <div id="app">
+  <div id="app" class="container">
     <Header />
-
-
     <router-view />
   </div>
 </template>
 
 <script>
 import Header from "./components/Header";
+import Aside from "./components/Aside";
 
 export default {
   name: 'app',
   components: {
+      Aside,
       Header
   }
 }
@@ -21,23 +21,7 @@ export default {
 <style>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+
 }
 
-nav {
-  padding: 20px 20px 20px 0px;
-}
-
-nav a {
-  padding: 10px;
-  text-decoration: none;
-  background: #fff;
-  border-radius: 3px;
-  color: rgb(0, 110, 255);
-  font-weight: bold;
-  margin-right: 15px;
-}
 </style>

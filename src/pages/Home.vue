@@ -1,19 +1,20 @@
 <template>
-    <div class="home">
-        <router-link v-if="canCreate" to="/post/create"><i class="material-icons">add</i>
-        </router-link>
-        <div v-if="posts.length">
+    <div class="row">
+        <div class="row col-md-8 blog-main" style="margin-top: 50px">
+            <div v-if="posts.length" class="col s7">
 
-            <Post
-                    v-for="(post, index) in posts"
-                    v-on:reloadPosts="loadPosts"
-                    v-bind:key="index"
-                    v-bind:post="post"
-            />
+                <Post
+                        v-for="(post, index) in posts"
+                        v-on:reloadPosts="loadPosts"
+                        v-bind:key="index"
+                        v-bind:post="post"
+                />
+            </div>
+            <div v-else>
+                <p>Nao existem posts</p>
+            </div>
         </div>
-        <div v-else>
-            <p>Nao existem posts</p>
-        </div>
+            <Aside/>
     </div>
 
 </template>
@@ -22,10 +23,11 @@
     import api from '../router/axios/api';
     import Post from "../components/_post/Post";
     import {BLOG_CREATE} from "../collections/permissions.collection"
+    import Aside from "../components/Aside";
 
     export default {
         name: 'Home',
-        components: {Post},
+        components: {Aside, Post},
         props: {},
         data() {
             return {

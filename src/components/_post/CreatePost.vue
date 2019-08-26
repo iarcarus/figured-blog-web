@@ -1,34 +1,38 @@
 <template>
-    <div style="margin-top: 50px">
+    <div >
         <form>
-            <label>titulo</label>
-            <input v-model="newPost.tittle" type="text" placeholder="My new post"/>
-            <label>Texto</label>
-            <input v-model="newPost.text" placeholder="My new post" type="text"/>
+            <div class="form-group">
+                <label>Title</label>
+                <input v-model="newPost.tittle" type="text" placeholder="My new post" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label for="postText">Text</label>
+                <textarea v-model="newPost.text" class="form-control" id="postText"
+                          rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <button type="button" @click="back" class="btn btn-outline-secondary">Cancel</button>
+                <button type="button" @click="save" class="btn btn-outline-primary">Save</button>
+            </div>
         </form>
-        <div v-if="newPost._id" style="color: darkgrey">
-            <label>Autor</label>
-            <p v-if="newPost.author">
-                {{newPost.author.name}}
-            </p>
-            <label>Id</label>
-            <p v-if="newPost._id">
-                {{newPost._id}}
-            </p>
-            <label>Created</label>
-            <p v-if="newPost.created_at">
-                {{newPost.created_at}}
-            </p>
-            <label>Last update</label>
-            <p v-if="newPost.updated_at">
-                {{newPost.updated_at}}
-            </p>
+        <form  v-if="newPost._id"  >
+        <div class="form-group">
+            <label>Author</label>
+            <input v-model="newPost.author.name" class="form-control" type="text" readonly>
         </div>
-
-        <div>
-            <button @click="back">Cancel</button>
-            <button @click="save">Save</button>
-        </div>
+            <div class="form-group">
+                <label>Id</label>
+                <input v-model="newPost._id" type="text" class="form-control" readonly/>
+            </div>
+            <div class="form-group">
+                <label>Created</label>
+                <input v-model="newPost.created_at" type="text"  class="form-control" readonly/>
+            </div>
+            <div class="form-group">
+                <label>Last updated</label>
+                <input v-model="newPost.updated_at" type="text" class="form-control" readonly/>
+            </div>
+        </form>
 
     </div>
 </template>
