@@ -21,16 +21,11 @@
                         <p class="" v-if="userName"> {{userName}}</p>
                         <a v-if="userName" class="btn btn-sm btn-outline-secondary" @click="logout">Logout</a>
                     </div>
-                    <a v-else class="btn btn-sm btn-outline-secondary" >Sign up</a>
+                    <a v-else class="btn btn-sm btn-outline-secondary" @click="signup" >Sign up</a>
                     <a v-if="!userName" class="btn btn-sm btn-outline-secondary"><router-link to="/login">Sign in</router-link></a>
                 </div>
             </div>
         </header>
-
-        <nav>
-
-        </nav>
-
     </div>
 </template>
 
@@ -46,7 +41,10 @@
               authentication.logout().then(()=>{
 
               })
-          }
+          },
+            signup() {
+              this.$router.push({name: 'Signup'})
+            }
         },
         computed: {
             userName() {

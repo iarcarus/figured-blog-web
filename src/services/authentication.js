@@ -23,11 +23,17 @@ const authentication = {
     },
     canAccess: function(permission = null) {
     return new Promise((resolve, reject) => {
+        if (permission === null){
+            return resolve()
+        }
         const listPermissions = store.state.currentUser.permissions
 
         this.isUserLogged = store.state.currentUser.checkIfUserAreLoggedIn
 
         const verifyPermission = () => {
+            if (permission === null){
+                return resolve()
+            }
             if (permission) {
                 const mustValidate = hasPermission(permission) && this.isUserLogged
                 return mustValidate ? resolve() : reject()

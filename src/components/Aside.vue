@@ -17,7 +17,6 @@
         name: "Aside",
         computed: {
             canCreate() {
-                console.log(this.$hasPermission(BLOG_CREATE))
                 return this.$hasPermission(BLOG_CREATE)
             }
         }

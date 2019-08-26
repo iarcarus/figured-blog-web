@@ -12,9 +12,10 @@
         </div>
 
         <div>
-            <button v-if="canDestroy" @click="deletePost(post._id)" class="btn-flat"><i
-                    class="material-icons">delete</i></button>
-            <button v-if="canEdit" @click="edit(post._id)" class="btn-flat"><i class="material-icons">edit</i></button>
+            <button type="button" v-if="canDestroy" @click="deletePost(post._id)" class="btn btn-outline-danger">
+                Delete
+            </button>
+            <button type="button" v-if="canEdit" @click="edit(post._id)" class="btn btn-outline-primary">Edit</button>
         </div>
         <hr v-if="!single"/>
     </div>
@@ -54,22 +55,24 @@
                 return this.$hasPermission(BLOG_DESTROY)
             },
             resume() {
-                return this.post.text.substring(0, 30)
+                return this.post.text.substring(0, 100)
             }
         }
     }
 </script>
 
 <style>
-.blog-post{
-    margin-bottom: 4rem;
-}
+    .blog-post {
+        margin-bottom: 4rem;
+    }
+
     .blog-post-title {
         margin-bottom: .25rem;
         font-size: 2.5rem;
     }
-.blog-post-meta {
-    margin-bottom: 1.25rem;
-    color: #999;
-}
+
+    .blog-post-meta {
+        margin-bottom: 1.25rem;
+        color: #999;
+    }
 </style>
