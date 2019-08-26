@@ -7,14 +7,15 @@
         </div>
         <p>{{post.text}}</p>
         <div>
-            <button @click="deletePost(post._id)" class="btn-flat"><i class="material-icons">delete</i></button>
-            <button @click="edit(post._id)" class="btn-flat"><i class="material-icons">edit</i></button>
+            <button v-if="canDestroy" @click="deletePost(post._id)" class="btn-flat"><i class="material-icons">delete</i></button>
+            <button v-if="canEdit" @click="edit(post._id)" class="btn-flat"><i class="material-icons">edit</i></button>
         </div>
     </div>
 </template>
 
 <script>
     import api from '../../router/axios/api'
+    import {BLOG_EDIT, BLOG_DESTROY} from '../../collections/permissions.collection'
 
     export default {
         name: "Post",
@@ -37,6 +38,13 @@
                     this.$toast.open('deleted')
                     this.$emit('reloadPosts')
                 }).catch()
+            }
+        }, computed: {
+            canEdit() {
+                return this.$hasPermission(BLOG_EDIT)
+            },
+            canDestroy() {
+                return this.$hasPermission(BLOG_DESTROY)
             }
         }
     }

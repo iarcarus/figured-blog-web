@@ -1,8 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Blog from './pages/Blog.vue'
 import CreatePost from './components/_post/CreatePost'
-import About from './pages/About.vue'
+import Home from './pages/Home.vue'
 import Login from './pages/Login.vue'
 import authentication from './services/authentication'
 
@@ -12,13 +11,8 @@ const router = new Router({
     routes: [
         {
             path: '/',
-            name: 'blog',
-            component: Blog
-        },
-        {
-            path: '/about',
-            name: 'about',
-            component: About
+            name: 'Home',
+            component: Home
         },
         {
             path: '/login',
@@ -43,7 +37,7 @@ router.beforeEach((to, from, next) => {
     authentication.canAccess()
         .then(() => next())
         .catch()
-
+    next()
 })
 
 export default router

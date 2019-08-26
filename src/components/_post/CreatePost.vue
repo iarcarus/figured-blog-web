@@ -71,7 +71,7 @@
                     case 'new':
                         api.post('post', {post_form: this.newPost})
                             .then(response => {
-                                this.$router.push('/about')
+                                this.$router.push('/')
                                 this.$toast.open({
                                     message: 'Created',
                                 })
@@ -88,7 +88,7 @@
                     case 'edit':
                         api.put(`post/${this.newPost._id}`, {post_form: this.newPost})
                             .then(response => {
-                                this.$router.push('/about')
+                                this.$router.push('/')
                                 this.$toast.open({
                                     message: 'Saved',
                                 })
@@ -105,7 +105,7 @@
                 }
             },
             back() {
-                this.$router.push('/about')
+                this.$router.push('/')
             }
         }
     }

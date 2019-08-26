@@ -1,6 +1,6 @@
 <template>
-    <div class="about">
-        <router-link v-if="isAdmin" to="/post/create"><i class="material-icons">add</i>
+    <div class="home">
+        <router-link v-if="canCreate" to="/post/create"><i class="material-icons">add</i>
         </router-link>
         <div v-if="posts.length">
 
@@ -21,9 +21,10 @@
 <script>
     import api from '../router/axios/api';
     import Post from "../components/_post/Post";
+    import {BLOG_CREATE} from "../collections/permissions.collection"
 
     export default {
-        name: 'About',
+        name: 'Home',
         components: {Post},
         props: {},
         data() {
@@ -42,8 +43,8 @@
                     })
             }
         }, computed:{
-            isAdmin(){
-                return this.$hasPermission('web.blog.index')
+            canCreate(){
+                return this.$hasPermission(BLOG_CREATE)
             }
         }
     }
