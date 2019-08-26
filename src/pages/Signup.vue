@@ -1,6 +1,6 @@
 <template>
 
-    <form>
+    <form @submit="signup">
         <div class="form-group">
             <label for="userName">Name</label>
             <input v-model="user.name" type="text" class="form-control" id="userName"
@@ -17,7 +17,7 @@
             <input v-model="user.password" type="password" class="form-control" id="exampleInputPassword1"
                    placeholder="Password">
         </div>
-        <button @click="signup" class="btn btn-primary">Submit</button>
+        <button class="btn btn-primary">Submit</button>
     </form>
 
 
@@ -38,7 +38,8 @@
             }
         },
         methods: {
-            signup() {
+            signup(e) {
+                e.preventDefault()
                 api.post('user', {user_form: this.user}).then(() => {
                     this.$router.push({name: 'Login'})
                     this.$toast.open('Created')
