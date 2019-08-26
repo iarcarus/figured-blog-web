@@ -1,4 +1,4 @@
-# figured-blog-web
+# Figured Blog Web Project
 
 ## Project setup
 ```
