@@ -11,6 +11,7 @@ import {BLOG_EDIT, BLOG_CREATE} from './collections/permissions.collection'
 Vue.use(Router)
 
 const router = new Router({
+    mode: 'history',
     routes: [
         {
             path: '/login',
@@ -49,6 +50,9 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
+    if (!to.meta.permission) {
+        return next()
+    }
     authentication.canAccess(to.meta.permission)
         .then(() => next())
         .catch(e => {

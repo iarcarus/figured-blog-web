@@ -8,7 +8,7 @@
         <p>{{postAttributes.text}}</p>
 
         <div>
-            <button type="button" v-if="canDestroy" @click="deletePost(postAttributes._id)" class="btn btn-outline-danger">
+            <button type="button" v-if="canDestroy" @click="deletePost(postAttributes._id)" class="btn btn-outline-danger mr-4">
                 Delete
             </button>
             <button type="button" v-if="canEdit" @click="edit(postAttributes._id)" class="btn btn-outline-primary">Edit</button>

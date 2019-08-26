@@ -6,11 +6,11 @@
                     <router-link class="blog-header-logo text-dark" to="/">Home</router-link>
                 </div>
                 <div class="col-4 d-flex justify-content-end align-items-center">
-                    <div class="row" v-if="userName">
-                        <p class="" v-if="userName"> {{userName}}</p>
+                    <div class="row flex align-items-center" v-if="userName">
+                        <p class="mr-4" v-if="userName"> {{userName}}</p>
                         <a v-if="userName" class="btn btn-sm btn-outline-secondary" @click="logout">Logout</a>
                     </div>
-                    <a v-else class="btn btn-sm btn-outline-secondary" @click="signup">Sign up</a>
+                    <a v-else class="btn btn-sm btn-outline-secondary mr-4" @click="signup">Sign up</a>
                     <a v-if="!userName" class="btn btn-sm btn-outline-secondary">
                         <router-link to="/login">Sign in</router-link>
                     </a>
