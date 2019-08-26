@@ -3,10 +3,12 @@ import BrowserStorage from '../../services/browser-storage'
 const state = {
     checkIfUserAreLoggedIn: typeof BrowserStorage.get('access_token') !== 'undefined',
     user: {
+        name: '',
         role: {
             permissions: {}
         }
-    }
+    },
+    permissions : []
 }
 
 const getters = {
@@ -20,7 +22,7 @@ const mutations = {
     setUser: (state, user) => {
         state.user.name = user.name || {}
         state.user.role = user.role || {}
-        state.permissions = user.role.permissions || {}
+        state.permissions = user.role.permissions || []
     }
 }
 

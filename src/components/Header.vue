@@ -6,35 +6,21 @@
         </nav>
         <div style="display: flex;flex-direction: row;align-items: center; margin-right: 10px">
             <i class="large material-icons">person</i>
-            <p> {{name}}</p>
+            <p> {{userName}}</p>
         </div>
 
     </div>
 </template>
 
 <script>
-    import api from '../router/axios/api'
-
     export default {
         name: "Header",
         data() {
             return {name: ''}
         },
-        methods: {
-            getCorrectName() {
-                api.post('/auth/me').then((response) => {
-                    this.name = response.data.user.name
-                }).catch(() => {
-
-                })
-            },
-        },
-        created() {
-            this.getCorrectName()
-        },
         computed: {
             userName() {
-                return this.getCorrectName()
+                return this.$store.state.currentUser.user.name
             }
         }
     }

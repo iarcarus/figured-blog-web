@@ -23,13 +23,14 @@ const authentication = {
     },
     canAccess: function(permission = null) {
     return new Promise((resolve, reject) => {
-        const listPermissions = store.state.currentUser.user.role.permissions
+        const listPermissions = store.state.currentUser.permissions
 
         this.isUserLogged = store.state.currentUser.checkIfUserAreLoggedIn
 
         const verifyPermission = () => {
             if (permission) {
-                return hasPermission(permission) && this.isUserLogged ? resolve() : reject()
+                const mustValidate = hasPermission(permission) && this.isUserLogged
+                return mustValidate ? resolve() : reject()
             }
         }
 
@@ -38,7 +39,9 @@ const authentication = {
         } else {
             api.post('/auth/me').then((response) => {
                 store.dispatch('currentUser/saveCurrentUser', response.data.user)
-                resolve()
+                    .then(() => {
+                    verifyPermission()
+                })
             }).catch(() => {
                 store.dispatch('currentUser/resetCurrentUser')
                 BrowserStorage.remove('access_token')

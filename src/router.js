@@ -30,7 +30,7 @@ const router = new Router({
         {
             path: '/post/edit/:id',
             name: 'EditPost',
-            meta: {permission: 'sadfsdfhg'},
+            meta: {permission: BLOG_EDIT},
             component: CreatePost
         }
 
