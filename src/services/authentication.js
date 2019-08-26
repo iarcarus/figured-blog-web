@@ -21,21 +21,21 @@ const authentication = {
             BrowserStorage.remove('access_token')
         })
     },
-    canAccess: function(module = null, permission = null) {
+    canAccess: function(permission = null) {
     return new Promise((resolve, reject) => {
-        // let listPermissions = store.state.currentUser.user.role.permissions
-        //
-        // this.isUserLogged = store.state.currentUser.checkIfUserAreLoggedIn
-        //
-        // const verifyPermission = () => {
-        //     if (permission == null) {
-        //         return hasPermission(module) && this.isUserLogged ? resolve() : reject()
-        //     }
-        // }
-        //
-        // if (listPermissions) {
-        //     verifyPermission()
-        // } else {
+        const listPermissions = store.state.currentUser.user.role.permissions
+
+        this.isUserLogged = store.state.currentUser.checkIfUserAreLoggedIn
+
+        const verifyPermission = () => {
+            if (permission) {
+                return hasPermission(permission) && this.isUserLogged ? resolve() : reject()
+            }
+        }
+
+        if (listPermissions.length) {
+            verifyPermission()
+        } else {
             api.post('/auth/me').then((response) => {
                 store.dispatch('currentUser/saveCurrentUser', response.data.user)
                 resolve()
@@ -44,7 +44,7 @@ const authentication = {
                 BrowserStorage.remove('access_token')
                 reject()
             })
-        // }
+        }
     })
 }
 }

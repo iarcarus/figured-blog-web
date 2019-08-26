@@ -4,29 +4,33 @@ import CreatePost from './components/_post/CreatePost'
 import Home from './pages/Home.vue'
 import Login from './pages/Login.vue'
 import authentication from './services/authentication'
+import {BLOG_EDIT, BLOG_CREATE, BLOG_INDEX} from './collections/permissions.collection'
 
 Vue.use(Router)
 
 const router = new Router({
     routes: [
         {
-            path: '/',
-            name: 'Home',
-            component: Home
-        },
-        {
             path: '/login',
             name: 'Login',
             component: Login
         },
         {
+            path: '/',
+            name: 'Home',
+            meta: {permission: BLOG_INDEX},
+            component: Home
+        },
+        {
             path: '/post/create',
             name: 'CreatePost',
+            meta: {permission: BLOG_CREATE},
             component: CreatePost
         },
         {
             path: '/post/edit/:id',
             name: 'EditPost',
+            meta: {permission: 'sadfsdfhg'},
             component: CreatePost
         }
 
@@ -34,9 +38,15 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-    authentication.canAccess()
+    authentication.canAccess(to.meta.permission)
         .then(() => next())
-        .catch()
+        .catch(e => {
+            if (authentication.isUserLogged) {
+                next('/')
+                return
+            }
+            next('/login')
+        })
     next()
 })
 
